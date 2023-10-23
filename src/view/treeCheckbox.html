@@ -1,0 +1,26 @@
+<ul class="tree">
+  <li ng-repeat="item in items">
+    <div class="tree__item">
+      <button
+        class="tree__button"
+        ng-class="{ 'tree__button--open': item.isOpen }"
+        ng-show="item.children.length"
+        ng-click="toggleIsOpen(item)"
+      ></button>
+      <label class="tree__label">
+        <input
+          class="tree__checkbox"
+          ng-class="{ 'tree__checkbox--checked': item.checked, 'tree__checkbox--undetermined': (haveCheckedChildren(item.children) && !item.checked )}"
+          type="checkbox"
+          ng-model="item.checked"
+          ng-click="handleToggleCheckbox(item)"
+        >
+        <span>{{ item.label }}</span>
+      </label>
+    </div>
+    <div class="tree__box-children" ng-show="item.children.length > 0 && item.isOpen">
+      <tree-checkbox items="item.children"></tree-checkbox>
+    </div>
+  </li>
+</ul>
+
